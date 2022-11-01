@@ -1,4 +1,5 @@
-import datetime
+from time import sleep
+from datetime import datetime, timedelta
 from random import random
 from django.utils import timezone
 
@@ -12,24 +13,34 @@ def generate_movement():
     return movement
 
 
-# def populate_db():
-#     while True:
-#         pass
-
-def run():
-    current_time = datetime.datetime.now(tz=timezone.utc)
+def populate_db():
     for i in range(TICKERS_N):
-        name_i=f"ticker_{i:02d}
+        name_i=f"ticker_{i:02d}"
         last_item = Ticker.objects.filter(name=name_i).last()
         if last_item:
-            pass
+            current_time = datetime.now(tz=timezone.utc)
+            dt = (current_time - last_item.time)
+            if dt >= timedelta(seconds=TIME_STEP):
+                ticker = Ticker(
+                name = name_i,
+                time = current_time,
+                price = last_item.price + generate_movement()
+            )
+                ticker.save()
+            else:
+                sleep(dt.microseconds/1000000.0)
         else:
+            current_time = datetime.now(tz=timezone.utc)
             ticker = Ticker(
-                name = f"ticker_{i:02d}",
+                name = name_i,
                 time = current_time,
                 price = 0
             )
             ticker.save()
 
-
-    #populate_db()
+def run():
+    while True:
+        try:
+            populate_db()
+        except KeyboardInterrupt:
+            break
