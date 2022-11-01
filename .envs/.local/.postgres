@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=ticker_chart
+POSTGRES_USER=efBzsgMYiDwfuvVyLdhVaVTRfeNNULTX
+POSTGRES_PASSWORD=wWw2AfS1FEwjTOaO9M3J2Lx8ssDOcY0qj2YCwL897FFv8b56ki97XKVETFvoePOr
