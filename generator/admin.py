@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Ticker
 
-# Register your models here.
+@admin.register(Ticker)
+class TickerAdmin(admin.ModelAdmin):
+    pass
