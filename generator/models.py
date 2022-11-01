@@ -6,13 +6,13 @@ class Ticker(models.Model):
     price = models.IntegerField()
 
     def __str__(self):
-        return f'{self.name, self.time.strftime("%Y-%m-%d %H:%M:%S")}'
+        return f'{self.time.strftime("%Y-%m-%d %H:%M:%S"), self.name}'
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=['name', 'time'], name='unique_name_time_combination'
+                fields=['time', 'name'], name='unique_time_name_combination'
             )
         ]
-        get_latest_by = ['name', 'time']
+        get_latest_by = ['time', 'name']
     
 
