@@ -1,6 +1,7 @@
-import sched, time
-from datetime import date, datetime, timedelta
 from random import random
+import time
+from datetime import datetime
+import sched
 from django.utils import timezone
 
 from generator.models import Ticker
