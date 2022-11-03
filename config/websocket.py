@@ -1,3 +1,5 @@
+import random
+
 async def websocket_application(scope, receive, send):
     while True:
         event = await receive()
@@ -10,4 +12,4 @@ async def websocket_application(scope, receive, send):
 
         if event["type"] == "websocket.receive":
             if event["text"] == "ping":
-                await send({"type": "websocket.send", "text": "pong!"})
+                await send({"type": "websocket.send", "text": f"{random.random()}"})
