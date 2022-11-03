@@ -8,6 +8,10 @@ Ticker chart allows you to select a ticker using the drop-down list and display 
 
 The service is based on the following stack: Django as a backend framework, a PostgreSQL database, and the Chart.js frontend library for real-time price charting. The frontend and backend parts communicate using websockets.
 
+Simple test screen
+
+https://github.com/matyushkin/ticker_chart/blob/main/test.mp4
+
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
