@@ -6,7 +6,7 @@ class Ticker(models.Model):
     price = models.IntegerField()
 
     def __str__(self):
-        return f'{self.time.strftime("%Y-%m-%d %H:%M:%S"), self.name}'
+        return f'{self.time.strftime("%Y-%m-%d %H:%M:%S"), self.name, self.price}'
     class Meta:
         constraints = [
             models.UniqueConstraint(
