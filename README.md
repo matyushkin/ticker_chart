@@ -6,7 +6,7 @@ The service implements an example of generating realtime data. It returns new pr
 
 Ticker chart allows you to select a ticker using the drop-down list and display the price chart for the selected instrument from the initial moment, adding data as it becomes available.
 
-The service is based on the following stack: Django as a backend framework, a PostgreSQL database, and the Chart.js frontend library for real-time price charting. The frontend and backend parts communicate using websockets.
+The service is based on the following stack: Django as a backend framework, PostgreSQL database, and the Chart.js frontend library for real-time price charting. The frontend and backend parts communicate using websockets.
 
 A small test of the service is shown in the video below.
 
