@@ -26,7 +26,7 @@ for (var i = 0; i < numberOfTickers; i++) {
 
 
 let config = {
-	type: 'line',
+	type: 'scatter',
 	data: {
 		datasets: [{
 			label: current_ticker,
@@ -84,17 +84,26 @@ let config = {
 
 window.myChart = new Chart(ctx, config);
 
+
 socket.addEventListener('message', (event) => {
     json = event.data.toString()
-    ticker_data = JSON.parse(json)
-	config.data.datasets[0].data = ticker_data
-	config.data.datasets[0].label = current_ticker
-	ticker_data.forEach((element) => {
-		config.data.datasets[0].data.push({
-			x: Date.parse(element.time),
-			y: element.price
+	temp_data = JSON.parse(json)
+	if (temp_data.length > 1) {
+		ticker_data = temp_data
+		config.data.datasets[0].data = ticker_data
+		config.data.datasets[0].label = current_ticker
+		ticker_data.forEach((element) => {
+			config.data.datasets[0].data.push({
+				x: Date.parse(element.time),
+				y: element.price
+			})
 		})
-	})
+	} else if (temp_data.length == 1) {
+		config.data.datasets[0].data.push({
+			x: Date.parse(temp_data[0].time),
+			y: temp_data[0].price
+		})
+	}
 	window.myChart.update()
 })
 
@@ -103,20 +112,13 @@ select.addEventListener("change", (event) => {
 	current_ticker = event.target.value
 	console.log('current_ticker', current_ticker)
 	socket.send('get_all_items_' + current_ticker)
+	let myInterval = setInterval(function() {
+		socket.send('get_last_item' + current_ticker)
+	}, 1000);
 })
 
 
 window.onload = function() {
-	socket.send('get_all_items_' + current_ticker)
-	ticker_data.forEach((element) => {
-		config.data.datasets[0].data.push({
-			x: Date.parse(element.time),
-			y: element.price
-		})
-	})
-	window.myChart.update()
+	const e = new Event("change")
+	select.dispatchEvent(e);
 }
-
-var myInterval = setInterval(function() {
-	console.log('test', Date.now())
-}, 1000);
