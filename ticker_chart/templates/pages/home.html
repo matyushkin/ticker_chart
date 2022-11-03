@@ -2,9 +2,11 @@
 {% block content %}
 <h1>Stock prices</h1>
 <div>
-    <canvas id="myChart" height="40vh" width="100vw" display="block"></canvas>
+    <canvas id="myChart" height="40vh" width="100vw" display="block">
+    </canvas>
 </div>
-
-<select class="form-select" aria-label="Choose ticker" id="ticker-choose"></select>
+<label for="ticker-choose">Choose a ticker</label>
+<select class="form-select" aria-label="Choose a ticker" id="ticker-choose" select-label="Choose a ticker">
+</select>
   
 {% endblock %}
