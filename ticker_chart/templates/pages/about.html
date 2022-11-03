@@ -1,1 +1,11 @@
 {% extends "base.html" %}
+{% block content %}
+<h1>About ticker chart project</h1>
+<div>
+The service implements an example of generating realtime data. It returns new prices once per second for 100 artificial trading instruments: ticker_00, ticker_01, ..., ticker_99. Random deviations are used as a price change function for each instrument.</div>
+<br/>
+<div>Ticker chart allows you to select a ticker using the drop-down list and display the price chart for the selected instrument from the initial moment, adding data as it becomes available.</div>
+<br/>
+<div>The service is based on the following stack: Django as a backend framework, a PostgreSQL database, and the Chart.js frontend library for real-time price charting. The frontend and backend parts communicate using websockets.
+</div>
+{% endblock %}

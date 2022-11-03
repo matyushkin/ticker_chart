@@ -44,6 +44,11 @@ async def websocket_application(scope, receive, send):
             break
 
         if event["type"] == "websocket.receive":
-            if event["text"] == "ping":
-                data = await get_last_item('ticker_94')
-                await send({"type": "websocket.send", "text": data})
+            # If message from frontend is get_all_items_NN
+            if event["text"].startswith("get_all_items"):
+                ticker_name = f"ticker_{event['text'][-2:]}"
+                data = await get_all_items(ticker_name)
+            if event["text"].startswith("get_last_item"):
+                ticker_name = f"ticker_{event['text'][-2:]}"
+                data = await get_last_item(ticker_name)
+            await send({"type": "websocket.send", "text": data})
