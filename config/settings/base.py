@@ -66,6 +66,7 @@ DJANGO_APPS = [
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
+    "channels",
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
@@ -303,3 +304,4 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+ASGI_APPLICATION = 'generator.asgi.application'
