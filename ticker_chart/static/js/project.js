@@ -11,12 +11,14 @@ const red = color('rgb(255, 99, 132)')
 let ctx = document.getElementById('myChart').getContext('2d');
 
 
+// for trainling zeros
 function pad(num, size) {
     num = num.toString();
     while (num.length < size) num = "0" + num;
     return num;
 }
 
+// add ticker names to dropdown select
 for (var i = 0; i < numberOfTickers; i++) {
 	const option = document.createElement("option");
 	option.value = pad(i, 2);
@@ -24,7 +26,7 @@ for (var i = 0; i < numberOfTickers; i++) {
 	select.appendChild(option);
 }
 
-
+// config of chartjs
 let config = {
 	type: 'scatter',
 	data: {
@@ -82,12 +84,14 @@ let config = {
 	}
 }
 
+// chart of chartjs
 window.myChart = new Chart(ctx, config);
 
-
+// for every messages from server
 socket.addEventListener('message', (event) => {
     json = event.data.toString()
 	temp_data = JSON.parse(json)
+	// whole data that we have for start of ticker monitoring
 	if (temp_data.length > 1) {
 		ticker_data = temp_data
 		config.data.datasets[0].data = ticker_data
@@ -98,7 +102,7 @@ socket.addEventListener('message', (event) => {
 				y: element.price
 			})
 		})
-	} else if (temp_data.length == 1) {
+	} else if (temp_data.length == 1) {  // case of additional data
 		config.data.datasets[0].data.push({
 			x: Date.parse(temp_data[0].time),
 			y: temp_data[0].price
@@ -107,17 +111,19 @@ socket.addEventListener('message', (event) => {
 	window.myChart.update()
 })
 
+// every select changing is a signal to send request to server
 select.addEventListener("change", (event) => {
 	config.data.datasets[0].data = []
 	current_ticker = event.target.value
 	console.log('current_ticker', current_ticker)
 	socket.send('get_all_items_' + current_ticker)
+	// send request for monitoring every second
 	let myInterval = setInterval(function() {
 		socket.send('get_last_item' + current_ticker)
 	}, 1000);
 })
 
-
+// not to wait at start but have some first graph
 window.onload = function() {
 	const e = new Event("change")
 	select.dispatchEvent(e);

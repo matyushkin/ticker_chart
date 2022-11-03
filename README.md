@@ -1,6 +1,6 @@
 # Ticker chart
 
-Simple tool for tickers monitoring
+Simple tool for tickers monitoring. Local dev server starts at [http://127.0.0.1:8000/](http://127.0.0.1:8000/) with `docker-compose -f local.yml up`.
 
 The service implements an example of generating realtime data. It returns new prices once per second for 100 artificial trading instruments: ticker_00, ticker_01, ..., ticker_99. Random deviations are used as a price change function for each instrument.
 
