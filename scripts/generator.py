@@ -42,11 +42,10 @@ def run():
                             time = datetime.now(tz=timezone.utc),
                             price = 0)
             ticker.save()
-    else:
-        while True:
-            try:
-                clocks += TIME_STEP
-                s.enterabs(clocks, 0, populate_db)
-                s.run()
-            except KeyboardInterrupt:
-                break
+    while True:
+        try:
+            clocks += TIME_STEP
+            s.enterabs(clocks, 0, populate_db)
+            s.run()
+        except KeyboardInterrupt:
+            break
